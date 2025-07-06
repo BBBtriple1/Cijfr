@@ -9,6 +9,7 @@ import { AddGradeDialog } from "@/components/AddGradeDialog";
 import { AddSubjectDialog } from "@/components/AddSubjectDialog";
 import { GradeCalculator } from "@/components/GradeCalculator";
 import { SubjectCard } from "@/components/SubjectCard";
+import { DashboardStats } from "@/components/DashboardStats";
 
 interface Subject {
   id: string;
@@ -225,6 +226,13 @@ const Dashboard = () => {
               </Button>
             </CardContent>
           </Card>
+        )}
+
+        {/* Statistics */}
+        {subjects.length > 0 && grades.length > 0 && (
+          <div className="mt-8">
+            <DashboardStats subjects={subjects} grades={grades} />
+          </div>
         )}
 
         {/* Grade Calculator */}

@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, TrendingUp, Target } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Subject {
   id: string;
@@ -27,6 +28,7 @@ interface SubjectCardProps {
 }
 
 export const SubjectCard = ({ subject, grades, onAddGrade }: SubjectCardProps) => {
+  const navigate = useNavigate();
   const calculateAverage = () => {
     if (grades.length === 0) return null;
     
@@ -54,7 +56,7 @@ export const SubjectCard = ({ subject, grades, onAddGrade }: SubjectCardProps) =
   const latestGrades = getLatestGrades();
 
   return (
-    <Card className="hover:shadow-md transition-shadow">
+    <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => navigate(`/subject/${subject.id}`)}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <div>
           <CardTitle className="text-lg">{subject.name}</CardTitle>
@@ -129,7 +131,7 @@ export const SubjectCard = ({ subject, grades, onAddGrade }: SubjectCardProps) =
             </div>
           )}
 
-          <Button onClick={onAddGrade} variant="outline" className="w-full">
+          <Button onClick={(e) => { e.stopPropagation(); onAddGrade(); }} variant="outline" className="w-full">
             <Plus className="h-4 w-4" />
             Cijfer Toevoegen
           </Button>
